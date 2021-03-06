@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "blogdimensional39dd58d3": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

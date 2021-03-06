@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-blogdimensional-dev-150332-authRole",
+      "UnauthRoleArn": "arn:aws:iam::339567028341:role/amplify-blogdimensional-dev-150332-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::339567028341:role/amplify-blogdimensional-dev-150332-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-blogdimensional-dev-150332-deployment",
+      "UnauthRoleName": "amplify-blogdimensional-dev-150332-unauthRole",
+      "StackName": "amplify-blogdimensional-dev-150332",
+      "StackId": "arn:aws:cloudformation:us-east-2:339567028341:stack/amplify-blogdimensional-dev-150332/1bcb8820-7ddd-11eb-a202-0216171f8fb8",
+      "AmplifyAppId": "dvkk93w8qb2au"
+    },
+    "categories": {
+      "auth": {
+        "blogdimensional39dd58d3": {}
+      }
+    }
+  }
+}
