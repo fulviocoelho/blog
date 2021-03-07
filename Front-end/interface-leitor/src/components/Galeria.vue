@@ -14,9 +14,9 @@
         <div class="clear"></div>
         <div class="paginacao">
             <div @click="page(1)" class="icons"> &laquo; </div>
-            <div @click="page((paginaatual - 1))" class="icons"> &lsaquo; </div>
-            <div @click="page(index)" v-for="index in posts.pages" v-bind:class="{ active : index === paginaatual}" :key="index" class="icons"> {{index}} </div>
-            <div @click="page((paginaatual + 1))" class="icons"> &rsaquo; </div>
+            <div @click="page((pagina - 1))" class="icons"> &lsaquo; </div>
+            <div @click="page(index)" v-for="index in posts.pages" v-bind:class="{ active : index == pagina}" :key="index" class="icons"> {{index}} </div>
+            <div @click="page((pagina + 1))" class="icons"> &rsaquo; </div>
             <div @click="page(posts.pages)" class="icons"> &raquo; </div>
         </div>
     </section>
@@ -26,16 +26,20 @@
 export default {
     name: 'Galeria',
     props: ["posts"],
+    mounted() {
+        this.pagina = this.$props.posts.thispage;
+    },
     data(){
-        return {
-            paginaatual: 1
+        return{
+            pagina: 1
         }
     },
     methods: {
         async page(id){
             if(id != 0 && id <= this.$props.posts.pages){
                 this.$emit('movePage' ,id);
-                this.paginaatual = id;
+                this.$props.posts.thispage = id;
+                this.pagina = id;
             }
         }   
     }

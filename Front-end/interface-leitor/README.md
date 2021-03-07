@@ -1,4 +1,4 @@
-# blogdimensional
+# Blog
 
 ## Project setup
 ```

@@ -68,7 +68,7 @@ export default {
       this.changePost();
     },
     movePage(pagina){
-      axios.get(`http://192.168.15.15:3000/api/post/${pagina}`).then(res => (this.posts.textos = res.data.textos));
+      axios.get(`http://192.168.15.15:3000/api/post/${pagina}`).then(res => (this.posts = res.data));
     }
   }
 }
