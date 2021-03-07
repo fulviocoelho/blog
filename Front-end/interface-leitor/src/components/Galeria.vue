@@ -1,7 +1,7 @@
 <template>
-    <section id="posts">
-        <div class="container posts">
-            <div @click="$emit('detalhes', post.id)" v-for="post in posts" :key="post.id" class="box">
+    <section class="container" id="posts">
+        <div class="posts">
+            <div @click="$emit('detalhes', post.id)" v-for="post in posts.textos" :key="post.id" class="box">
                 <a href="#">
                     <img :src="post.img" alt="">
                     <div class="descricao">
@@ -11,13 +11,34 @@
                 </a>
             </div>
         </div>
+        <div class="clear"></div>
+        <div class="paginacao">
+            <div @click="page(1)" class="icons"> &laquo; </div>
+            <div @click="page((paginaatual - 1))" class="icons"> &lsaquo; </div>
+            <div @click="page(index)" v-for="index in posts.pages" v-bind:class="{ active : index === paginaatual}" :key="index" class="icons"> {{index}} </div>
+            <div @click="page((paginaatual + 1))" class="icons"> &rsaquo; </div>
+            <div @click="page(posts.pages)" class="icons"> &raquo; </div>
+        </div>
     </section>
 </template>
 
 <script>
 export default {
     name: 'Galeria',
-    props: ["posts"]
+    props: ["posts"],
+    data(){
+        return {
+            paginaatual: 1
+        }
+    },
+    methods: {
+        async page(id){
+            if(id != 0 && id <= this.$props.posts.pages){
+                this.$emit('movePage' ,id);
+                this.paginaatual = id;
+            }
+        }   
+    }
 }
 </script>
 
@@ -49,5 +70,18 @@ export default {
     .box a{
         color: inherit;
         text-decoration: none;
+    }
+    .icons{
+        height: 20px;
+        width: 20px;
+        background: white;
+        float: left;
+        text-align: center;
+        border: 0.5px solid rgb(218, 218, 218);
+        cursor: pointer;
+        padding-top: 3px;
+    }
+    .active{
+        text-decoration: underline;
     }
 </style>

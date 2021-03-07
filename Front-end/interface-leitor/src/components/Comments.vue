@@ -41,6 +41,7 @@ export default {
         padding-top: 20px;
         padding-bottom: 20px;
         border-top: 1px solid gray;
+        overflow: hidden;
     }
     .comment .usuario{
         font-size: 25px;

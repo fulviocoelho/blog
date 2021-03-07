@@ -27,7 +27,7 @@ export default {
     name: 'Post',
     props: ['post'],
     components: {
-        Comments
+        Comments,
     },
     methods: {
         novoComentario(newComment){
@@ -68,5 +68,10 @@ export default {
     }
     #post{
         background: white;
+    }
+    .display{
+            width: 100% !important;
+        margin-top: 100px;
+        background: #eeeeee;
     }
 </style>

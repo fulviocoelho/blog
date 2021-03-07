@@ -35,7 +35,7 @@ export default {
             await this.getUser();
             if(this.comentario !== '' && this.auth !== ''){
                 console.log(this.$props.postid);
-                axios.post(`http://localhost:3000/api/comment`, {postid : this.$props.postid, coment: this.comentario, usuario: this.auth.username}).then(res => (console.log(res)));
+                axios.post(`http://192.168.15.15:3000/api/comment`, {postid : this.$props.postid, coment: this.comentario, usuario: this.auth.username}).then(res => (console.log(res)));
                 
                 const html = new RegExp('\\n', 'g');
                 this.comentario = this.comentario.replace(html, '<br>');
