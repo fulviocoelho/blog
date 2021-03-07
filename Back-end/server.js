@@ -18,7 +18,7 @@ app.get('/api/config', (req, res) => {
         }
         res.send(data);
     });
-});app.get('/api/post', (req, res) => {
+});app.get('/api/post/:page', (req, res) => {
     const fs = require('fs');
     fs.readFile('./json/galeria.json', 'utf-8', (err, data) => {
         if(err){
@@ -26,10 +26,14 @@ app.get('/api/config', (req, res) => {
             return
         }
         res.header("Access-Control-Allow-Origin", "*");
-        res.send(data);
+        var json = JSON.parse(data);
+        var textos = json.textos.slice((9*(req.params.page-1)),(9*req.params.page));
+        json.pages = Math.ceil((Object.keys(json.textos).length / 9));
+        json.textos = textos;
+        res.send(json);
     });
 });
-app.get('/api/post/:id', (req, res) => {
+app.get('/api/post/article/:id', (req, res) => {
     fs.readFile(`./json/textos/${req.params.id}.json`, 'utf-8', (err, data) => {
         if(err){
             console.log(`Erro ao ler arquivo textos.json para responder a requisição /post => ${err}`);
