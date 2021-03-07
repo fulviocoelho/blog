@@ -37,7 +37,7 @@ export default {
         margin-top: 30px;
     }
     .comment{
-        width: 100%;
+        width: -webkit-fill-available;
         padding-top: 20px;
         padding-bottom: 20px;
         border-top: 1px solid gray;
