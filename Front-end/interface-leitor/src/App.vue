@@ -1,15 +1,18 @@
 <template>
-  <div v-if="loaded">
-    <Header v-bind:config="config" />  
-    <Artigo v-bind:at="accesstoken" v-bind:login="login" v-bind:post="post" v-on:act="act" v-on:voltar="emptyArtigo" v-on:novoComentario="novoComentario" v-if="showpost === true"/> 
-    <Galeria v-bind:posts="posts" v-on:detalhes="loadArtigo" v-else-if="showpost === false && posts !== ''"/> 
-    <div class="container" v-else>
-        <div style="margin: 50px auto;width: fit-content;">
-          <h1 class="erro">Nenhum Artigo Disponivel no Momento</h1>
-        </div>
+  <div>
+    <div v-if="isLoaded">
+      <Header v-bind:config="config" />  
+      <Artigo v-bind:post="post" v-on:voltar="emptyArtigo" v-on:novoComentario="novoComentario" v-if="isVisible === true"/> 
+      <Galeria v-bind:posts="posts" v-on:detalhes="loadArtigo" v-else-if="isVisible === false && posts !== ''"/> 
+      <div class="container" v-else>
+          <div style="margin: 50px auto;width: fit-content;">
+            <h1 class="erro">Nenhum Artigo Disponivel no Momento</h1>
+          </div>
+      </div>
+      <div class="clear"></div>
+      <Footer v-bind:config="config"/>
     </div>
-    <div class="clear"></div>
-    <Footer v-bind:config="config"/>
+    <Loader v-else />
   </div>
 </template>
 
@@ -19,6 +22,7 @@ import Header from './components/Header'
 import Galeria from './components/Galeria'
 import Artigo from './components/Artigo'
 import Footer from './components/Footer'
+import Loader from './components/Loader'
 
 export default {
   name: 'App',
@@ -26,19 +30,19 @@ export default {
     Header,
     Galeria,
     Artigo,
-    Footer
+    Footer,
+    Loader
   },
   async created(){
     await axios.get('http://localhost:3000/api/config').then(res => (this.config = res.data));
     await axios.get('http://localhost:3000/api/post').then(res => (this.posts = res.data.textos));
-    this.loaded = true;
+    document.title = this.config.nome;
+    this.isLoaded = true;
   },
   data() {
     return {
-      showpost: false,
-      login: false,
-      loaded: false,
-      accesstoken: '',
+      isVisible: false,
+      isLoaded: false,
       config: '',
       posts: '',
       post: ''
@@ -46,16 +50,10 @@ export default {
   },
   methods: {
     changePost() {
-      this.showpost = !this.showpost;
+      this.isVisible = !this.isVisible;
     },
     novoComentario(newComment) {      
       this.post.comentarios = [...this.post.comentarios, newComment]
-    },
-    act(token){
-      if(token !== null && token !== ''){
-        this.accesstoken = token;
-        this.login = true;
-      }
     },
     loadArtigo(id){
       axios.get(`http://localhost:3000/api/post/${id}`)
@@ -83,12 +81,13 @@ export default {
     padding: 0;
     min-height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
+    background: #eeeeee;
   }
   .clear{
     clear: both;
   }
   .container{
-    max-width: 1000px;
+    max-width: 960px;
     margin: 0 auto;
     padding-left: 10px;
     padding-right: 10px;

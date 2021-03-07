@@ -1,8 +1,8 @@
 <template>
     <header>
         <div class="container">    
-            <div id="logo"><img :src="config.logo" alt=""></div>    
-            <div class="text"><h1>{{config.titulo}}</h1></div>
+            <div v-if="config.logo !== ''" id="logo"><img :src="config.logo" alt=""></div>    
+            <div v-else class="text"><h1>{{config.nome}}</h1></div>
             <div style="clear:both"></div>
         </div>
     </header>    
@@ -20,18 +20,19 @@ export default {
         max-height: 100px;
     }
     header .container #logo{
-        float: left;
+        margin-top: 50px;
+        margin-left: auto;
     }
     header .container .text{
-        float: right;
-        margin-top: 30px;
+        margin-top: 50px;
     }
     header .container .text h1{
         margin: 0;
         padding: 0;
     }
     header{
-        border-bottom: 3px solid gray;
+        margin-bottom: 35px;
         height: auto;
+        display: flex;
     }
 </style>

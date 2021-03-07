@@ -20,16 +20,13 @@ import AddComment from './AddComment'
 
 export default {
     name: 'Comments',
-    props: ['comentarios','at','login','postid'],
+    props: ['comentarios','postid'],
     components: {
         AddComment
     },
     methods: {
         novoComentario(newComment){
             this.$emit('novoComentario', newComment);
-        },
-        act(token){
-            this.$emit('act',token);
         }
     }
 }
