@@ -1,5 +1,13 @@
 {
     "logo": "https://via.placeholder.com/300x100",
-    "titulo": "Nome do Blog",
-    "footer": "NOME DO BLOG"
+    "nome": "Nome do Blog",
+    "ano": "2021",
+	"midias": {
+		"youtube": "#",
+		"facebook": "#",
+		"instagram": "#",
+		"twitter": "#",
+		"twitch": "#",
+		"rss": "#"
+	}
 }
