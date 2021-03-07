@@ -80,7 +80,7 @@ export default {
 }
 
 .comment{
-    width: 100%;
+    width: -webkit-fill-available;
     padding: 10px 20px;
     border-radius: 0;
     border: 1px solid rgb(218, 218, 218);
