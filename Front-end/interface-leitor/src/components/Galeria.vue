@@ -30,16 +30,13 @@ export default {
         width: 300px;
         margin: 10px;
         float: left;
+        background: white;
     }
     .box img{
         max-width: 300px;
     }
     .box .descricao{
-        margin-top: -4px;
-        border-left: 1px solid gray;
-        border-right: 1px solid gray;
-        border-bottom: 1px solid gray;
-        padding: 5px;
+        padding: 15px 10px;
     }
     .box .descricao .title{
         text-align: center;

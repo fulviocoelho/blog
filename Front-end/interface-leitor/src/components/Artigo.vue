@@ -1,5 +1,5 @@
 <template>
-    <section id="post">
+    <section class="container" id="post">
         <div class="container">
             <button @click="$emit('voltar')" class="back"><img src="../assets/left-arrow.svg" alt=""></button>
             <div v-if="post !== ''">
@@ -10,13 +10,13 @@
                     {{post.texto}}
                 </div> 
             </div>
-            <div v-else>
-                <div style="margin: 50px auto;width: fit-content;">
-                <h1 class="erro">Texto Não Encontrado!!</h1>
+            <div v-else style="padding: 200px 0px;">
+                <div style="margin: auto;width: fit-content;">
+                    <h1 class="erro">Texto Não Encontrado!!</h1>
                 </div>
             </div>
         </div>
-        <Comments v-if="post !== ''" v-on:act="act" v-on:novoComentario="novoComentario" v-bind:at="at" v-bind:login="login" v-bind:comentarios="post.comentarios" v-bind:postid="post.id" />
+        <Comments v-if="post !== ''" v-on:novoComentario="novoComentario" v-bind:comentarios="post.comentarios" v-bind:postid="post.id" />
     </section>
 </template>
 
@@ -25,16 +25,13 @@ import Comments from './Comments'
 
 export default {
     name: 'Post',
-    props: ['post','at','login'],
+    props: ['post'],
     components: {
         Comments
     },
     methods: {
         novoComentario(newComment){
             this.$emit('novoComentario', newComment);
-        },
-        act(token){
-            this.$emit('act',token);
         }
     }
 }
@@ -68,5 +65,8 @@ export default {
     }
     .back:focus{
         outline: none;
+    }
+    #post{
+        background: white;
     }
 </style>
