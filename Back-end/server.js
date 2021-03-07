@@ -29,6 +29,7 @@ app.get('/api/config', (req, res) => {
         var json = JSON.parse(data);
         var textos = json.textos.slice((9*(req.params.page-1)),(9*req.params.page));
         json.pages = Math.ceil((Object.keys(json.textos).length / 9));
+        json.thispage = req.params.page;
         json.textos = textos;
         res.send(json);
     });
