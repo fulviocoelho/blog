@@ -127,5 +127,8 @@ export default {
       max-width: fit-content !important;
       padding-top: 10px !important;
     }
+    .submit{
+      width: 100%;
+    }
   }
 </style>

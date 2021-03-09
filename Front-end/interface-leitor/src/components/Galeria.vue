@@ -14,9 +14,11 @@
         <div class="clear"></div>
         <div class="paginacao">
             <div @click="page(1)" class="icons"> &laquo; </div>
-            <div @click="page((pagina - 1))" class="icons"> &lsaquo; </div>
-            <div @click="page(index)" v-for="index in posts.pages" v-bind:class="{ active : index == pagina}" :key="index" class="icons"> {{index}} </div>
-            <div @click="page((pagina + 1))" class="icons"> &rsaquo; </div>
+            <div @click="page((Number(pagina) - 1))" class="icons"> &lsaquo; </div>
+            <div @click="page((Number(pagina) - 5))" v-if="where > 0" class="icons"> ... </div>
+            <div @click="page(Number(index) + (5*where))" v-for="index in this.blocos[where].paginas" v-bind:class="{ active : (index + (5*where)) == pagina}" :key="(index + (5*where))" class="icons"> {{(index + (5*where))}} </div>
+            <div @click="page((Number(pagina) + 5))" v-if="where < (blocos.length - 1 )" class="icons"> ... </div>
+            <div @click="page((Number(pagina) + 1))" class="icons"> &rsaquo; </div>
             <div @click="page(posts.pages)" class="icons"> &raquo; </div>
         </div>
     </section>
@@ -26,18 +28,42 @@
 export default {
     name: 'Galeria',
     props: ["posts"],
-    mounted() {
+    created() {
+        try{
+        var repeticao = Math.ceil(this.$props.posts.pages / 5);
+        var paginas = this.$props.posts.pages;
+        for(var i = 1; i <= repeticao; i++){
+            if(i == repeticao){
+                this.blocos = [...this.blocos, {paginas: paginas}]
+            }else{
+                this.blocos = [...this.blocos, {paginas: paginas - (paginas-5)}]
+            }
+            paginas = paginas-5;
+        }
         this.pagina = this.$props.posts.thispage;
+        this.where = (Math.ceil(this.pagina/5)-1);
+        }catch(e){
+            console.log('achoooo');
+        }
     },
     data(){
         return{
-            pagina: 1
+            pagina: 1,
+            where: 0,
+            blocos: []
         }
     },
     methods: {
         async page(id){
             if(id != 0 && id <= this.$props.posts.pages){
                 this.$emit('movePage' ,id);
+                this.where = (Math.ceil(id/5) - 1);
+                this.$props.posts.thispage = id;
+                this.pagina = id;
+            }else if(id != 0 && id > this.$props.posts.pages){
+                id = this.$props.posts.pages;
+                this.$emit('movePage' ,id);
+                this.where = (Math.ceil(id/5) - 1);
                 this.$props.posts.thispage = id;
                 this.pagina = id;
             }
@@ -77,13 +103,13 @@ export default {
     }
     .icons{
         height: 20px;
-        width: 20px;
+        min-width: 20px;
         background: white;
         float: left;
         text-align: center;
         border: 0.5px solid rgb(218, 218, 218);
         cursor: pointer;
-        padding-top: 3px;
+        padding: 3px;
     }
     .active{
         text-decoration: underline;
