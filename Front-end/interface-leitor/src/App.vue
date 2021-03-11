@@ -41,7 +41,7 @@ export default {
   },
   data() {
     return {
-      backend: 'http://192.168.15.15:3000/',
+      backend: 'http://ec2-18-217-55-197.us-east-2.compute.amazonaws.com/',
       isVisible: false,
       isLoaded: false,
       config: '',
