@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <Comments v-if="post !== ''" v-on:novoComentario="novoComentario" v-bind:comentarios="post.comentarios" v-bind:postid="post.id" />
+        <Comments v-if="post !== ''" v-on:novoComentario="novoComentario" v-bind:backend="backend" v-bind:comentarios="post.comentarios" v-bind:postid="post.id" />
     </section>
 </template>
 
@@ -25,7 +25,7 @@ import Comments from './Comments'
 
 export default {
     name: 'Post',
-    props: ['post'],
+    props: ['post','backend'],
     components: {
         Comments,
     },
