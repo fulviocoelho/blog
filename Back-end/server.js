@@ -2,7 +2,7 @@ console.log('Iniciando constantes...');
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = 3000;
+const port = 80;
 const fs = require('fs');
 const { json } = require('express');
 app.use(cors({origin: '*'}));
