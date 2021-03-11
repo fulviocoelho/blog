@@ -7,7 +7,7 @@
             </div>
         </div>
         <amplify-authenticator>
-            <AddComment v-bind:postid="postid" v-on:novoComentario="novoComentario" />
+            <AddComment v-bind:backend="backend" v-bind:postid="postid" v-on:novoComentario="novoComentario" />
             <amplify-sign-out></amplify-sign-out>
         </amplify-authenticator>
         <div class="clear"></div>
@@ -20,7 +20,7 @@ import AddComment from './AddComment'
 
 export default {
     name: 'Comments',
-    props: ['comentarios','postid'],
+    props: ['comentarios','postid','backend'],
     components: {
         AddComment
     },

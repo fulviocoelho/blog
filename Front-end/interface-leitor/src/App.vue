@@ -2,7 +2,7 @@
   <div>
     <div v-if="isLoaded">
       <Header v-bind:config="config" />  
-      <Artigo v-bind:post="post" v-on:voltar="emptyArtigo" v-on:novoComentario="novoComentario" v-if="isVisible === true"/> 
+      <Artigo v-bind:backend="backend" v-bind:post="post" v-on:voltar="emptyArtigo" v-on:novoComentario="novoComentario" v-if="isVisible === true"/> 
       <Galeria v-bind:posts="posts" v-on:movePage="movePage" v-on:detalhes="loadArtigo" v-else-if="isVisible === false && posts !== ''"/> 
       <div class="container" v-else>
           <div style="margin: 50px auto;width: fit-content;">
@@ -34,13 +34,14 @@ export default {
     Loader
   },
   async created(){
-    await axios.get('http://192.168.15.15:3000/api/config').then(res => (this.config = res.data));
-    await axios.get('http://192.168.15.15:3000/api/post/1').then(res => (this.posts = res.data));
+    await axios.get(`${this.backend}api/config`).then(res => (this.config = res.data));
+    await axios.get(`${this.backend}api/post/1`).then(res => (this.posts = res.data));
     document.title = this.config.nome;
     this.isLoaded = true;
   },
   data() {
     return {
+      backend: 'http://192.168.15.15:3000/',
       isVisible: false,
       isLoaded: false,
       config: '',
@@ -56,7 +57,7 @@ export default {
       this.post.comentarios = [...this.post.comentarios, newComment]
     },
     loadArtigo(id){
-      axios.get(`http://192.168.15.15:3000/api/post/article/${id}`)
+      axios.get(`${this.backend}api/post/article/${id}`)
       .then(res => (this.post = res.data))
       .catch(error => {
         console.log(error) 
@@ -68,7 +69,7 @@ export default {
       this.changePost();
     },
     movePage(pagina){
-      axios.get(`http://192.168.15.15:3000/api/post/${pagina}`).then(res => (this.posts = res.data));
+      axios.get(`${this.backend}api/post/${pagina}`).then(res => (this.posts = res.data));
     }
   }
 }
